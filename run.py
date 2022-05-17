@@ -85,21 +85,21 @@ class ReportParser:
     df.to_csv(file_name, encoding="utf-8")
 
   def fix_multiple_bdu_rows(self, file_name):
-    df = pd.read_csv(saved_file_path, encoding="utf-8")
+    df = pd.read_csv(self.saved_file_path, encoding="utf-8", index_col=0)
 
     df_idxs = df[df['bdu'].str.len() > 14]['bdu'].index
     bdu_series1 = df[df['bdu'].str.len() > 14]['bdu'].str[:14]
     bdu_series2 = df[df['bdu'].str.len() > 14]['bdu'].str[14:]
 
     for idx in df_idxs:
-      df.iloc[idx]['bdu'] = bdu_series1[idx]
+      df.loc[idx, 'bdu'] = bdu_series1[idx]
 
-    df_n = df.iloc[df_idxs]
+    df_n = df.iloc[df_idxs].copy()
 
     for idx in df_idxs:
-      df_n.loc[idx]['bdu'] = bdu_series2[idx]
+      df_n.loc[idx, 'bdu'] = bdu_series2[idx]
 
-    df = df.append(df_n).reset_index()
+    df = df.append(df_n)
 
     df.to_csv(file_name, encoding="utf-8")
 
@@ -123,4 +123,4 @@ if __name__ == "__main__":
   reportParser = ReportParser(IS_DIR, glob)
   reportParser.print_file_list()
   reportParser.parse_files()
-  reportParser.fix_multiple_bdu_rows()
+  reportParser.fix_multiple_bdu_rows("report.csv")
