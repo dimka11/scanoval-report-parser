@@ -84,8 +84,8 @@ class ReportParser:
   def save_csv_to_disk(self, df, file_name):
     df.to_csv(file_name, encoding="utf-8")
 
-  def fix_multiple_bdu_rows(self, file_name):
-    df = pd.read_csv(self.saved_file_path, encoding="utf-8", index_col=0)
+  def fix_multiple_bdu_rows(self, file_name, remove_orig_file=True, only_bdu=True):
+    df = pd.read_csv(self.saved_file_path, encoding="utf-8")
 
     df_idxs = df[df['bdu'].str.len() > 14]['bdu'].index
     bdu_series1 = df[df['bdu'].str.len() > 14]['bdu'].str[:14]
@@ -100,8 +100,15 @@ class ReportParser:
       df_n.loc[idx, 'bdu'] = bdu_series2[idx]
 
     df = df.append(df_n)
+    df = df.drop(df.columns[0],axis=1)
 
-    df.to_csv(file_name, encoding="utf-8")
+    if only_bdu:
+      df = df[['bdu']]
+
+    df.to_csv(file_name, encoding="utf-8", index=False)
+
+    if remove_orig_file:
+      os.remove(self.saved_file_path)
 
 
 if __name__ == "__main__":
