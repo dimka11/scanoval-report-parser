@@ -1,3 +1,4 @@
 lxml
 pandas
 beautifulsoup4
+streamlit

@@ -5,18 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScanOVAL_HTML_CSV_Runner"
         mc:Ignorable="d"
-        Title="ScanOval HTML CSV" Height="455" Width="230" MaxHeight="455">
+        Title="ScanOval HTML CSV" Height="340" Width="230" MaxWidth="240" MinWidth="220" MaxHeight="340" MinHeight="330">
     <Grid>
-        <TextBox Name="textBoxFolder" HorizontalAlignment="Left" Margin="10,73,0,0" Text="B:/Projects/MastersWorks" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" AllowDrop="True"/>
-        <Button Content="Конвертировать" HorizontalAlignment="Center" Margin="0,103,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox Name="textBoxScriptPath" FontSize="8" HorizontalAlignment="Left" Margin="10,31,0,0" Text="B:/Projects/MastersWorks/run.py" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" AllowDrop="True"/>
-        <Label Content="Путь до скрипта" FontSize="8" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Путь к папке с отчетами" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-        <StackPanel HorizontalAlignment="Center" Margin="0,175,0,105">
-            <Label Content="Перетащите папку ниже" />
-            <ListBox Name="listBox"  BorderThickness="2" AllowDrop="True" Drop="dragDropArea_Drop" MaxHeight="40" Height="39"/>
-            <TextBox Text="Drag and Drop" AllowDrop="True" PreviewDragOver="TextBox_PreviewDragOver" Drop="TextBox_Drop"  BorderThickness="2" Background="AliceBlue" Height="28"/>
-            <Rectangle x:Name="dragDropArea" Height="55"  Stroke="Black" Width="210" AllowDrop="True" PreviewDragOver="TextBox_PreviewDragOver" Drop="TextBox_Drop"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="0"></RowDefinition>
+            <RowDefinition Height="Auto" MinHeight="0"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,10" Width="190">
+            <Label Content="Путь до скрипта" FontSize="10" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="textBoxScriptPath" FontSize="10" HorizontalAlignment="Left" Margin="0,0,0,0" Text="B:/Projects/MastersWorks/run.py" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" AllowDrop="True"/>
+            <Label Content="Путь к папке с отчетами" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+            <TextBox Name="textBoxFolder" HorizontalAlignment="Left" Margin="0,0,0,10" Text="B:/Projects/MastersWorks" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" AllowDrop="True"/>
+            <Button Content="Конвертировать" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" Width="190">
+            <!--<Label Content="Перетащите папку ниже" />-->
+            <!--<ListBox Name="listBox"  BorderThickness="2" AllowDrop="True" Drop="dragDropArea_Drop" MaxHeight="40" Height="39"/>-->
+            <TextBox Text="Перетащите папку с отчетами &#x0a;в это окно" Margin="0,0,0,0" AllowDrop="True" PreviewDragOver="TextBox_PreviewDragOver" Drop="TextBox_Drop"  BorderThickness="2" Background="AliceBlue" Height="52"/>
+            <!--<Rectangle x:Name="dragDropArea" Height="55"  Stroke="Black" Width="210" AllowDrop="True" PreviewDragOver="TextBox_PreviewDragOver" Drop="TextBox_Drop"/>-->
+            <Button Name="SelectDirBtn" Margin="20,10,20,0" Height="20" Content="Выбрать папку с отчетами" Click="SelectDirBtn_Click"></Button>
+            <Button Name="SelectScriptPathBtn" Margin="20,10,20,10" Height="20" Content="Указать путь до скрипта" Click="SelectScriptPathBtn_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

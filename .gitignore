@@ -2,6 +2,7 @@
 *.csv
 *.html
 .ipynb_checkpoints
+ __pycache__
 ScanOVAL_HTML_CSV_Runner/.vs
 ScanOVAL_HTML_CSV_Runner/ScanOVAL_HTML_CSV_Runner/bin
 ScanOVAL_HTML_CSV_Runner/ScanOVAL_HTML_CSV_Runner/obj
